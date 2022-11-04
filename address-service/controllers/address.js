@@ -7,13 +7,13 @@ const createAddress = async (req, res) => {
     const userId = 999;
     if (req.body.default) {
       await db.Address.update({
-        default: 0
+        default: false
       }, { where: { userId: userId } });
     }
     const newAddress = await db.Address.create({
       address: req.body.address,
-      default: req.body.default || 0,
-      userId 
+      default: req.body.default || false,
+      userId
     })
     return res.status(200).json({
       status: 'success',
@@ -70,12 +70,12 @@ const updateAddress = async (req, res) => {
     if (address) {
       if (req.body.default) {
         await db.Address.update({
-          default: 0
+          default: false
         }, { where: { userId: address.userId } });
       }
       const newAddress = await db.Address.update({
         address: req.body.address,
-        default: req.body.default || 0,
+        default: req.body.default || false,
       }, { where: { id: id } });
       return res.status(200).json({
         status: 'success',
