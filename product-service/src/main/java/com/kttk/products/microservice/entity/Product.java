@@ -1,7 +1,14 @@
 package com.kttk.products.microservice.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "product")
 public class Product {

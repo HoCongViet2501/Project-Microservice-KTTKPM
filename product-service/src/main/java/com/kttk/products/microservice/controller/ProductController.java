@@ -1,8 +1,11 @@
 package com.kttk.products.microservice.controller;
 
+import com.kttk.products.microservice.dto.request.ProductRequest;
 import com.kttk.products.microservice.entity.Brand;
 import com.kttk.products.microservice.entity.Category;
 import com.kttk.products.microservice.entity.Product;
+import com.kttk.products.microservice.service.BrandService;
+import com.kttk.products.microservice.service.CategoryService;
 import com.kttk.products.microservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
+    private BrandService brandService;
 
     @GetMapping("")
     public ResponseEntity<?> getProducts() {
@@ -47,13 +54,36 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> addProduct(@RequestBody Product product) {
-        return ResponseEntity.ok().body(productService.addProduct(product));
+    public ResponseEntity<?> addProduct(@RequestBody ProductRequest product) {
+        Brand brand = brandService.getBrandById(product.getBrandId());
+        Category category = categoryService.getCategoryById(product.getCategoryId());
+        Product newProduct = new Product();
+        newProduct.setName(product.getName());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setImageUrl(product.getImageUrl());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setUnitsInStock(product.getUnitsInStock());
+        newProduct.setCategory(category);
+        newProduct.setBrand(brand);
+        newProduct.setIsActive(product.getIsActive());
+
+        return ResponseEntity.ok().body(productService.addProduct(newProduct));
     }
 
-    @PutMapping("")
-    public ResponseEntity<?> updateProduct(@RequestBody Product product) {
-        return ResponseEntity.ok().body(productService.updateProduct(product));
+    @PutMapping("/{product_id}")
+    public ResponseEntity<?> updateProduct(@RequestBody ProductRequest product, @PathVariable("product_id") Integer productId) {
+        Brand brand = brandService.getBrandById(product.getBrandId());
+        Category category = categoryService.getCategoryById(product.getCategoryId());
+        Product newProduct = new Product();
+        newProduct.setName(product.getName());
+        newProduct.setDescription(product.getDescription());
+        newProduct.setImageUrl(product.getImageUrl());
+        newProduct.setPrice(product.getPrice());
+        newProduct.setUnitsInStock(product.getUnitsInStock());
+        newProduct.setCategory(category);
+        newProduct.setBrand(brand);
+        newProduct.setIsActive(product.getIsActive());
+        return ResponseEntity.ok().body(productService.updateProduct(newProduct));
     }
 
     @DeleteMapping("/{product_id}")
