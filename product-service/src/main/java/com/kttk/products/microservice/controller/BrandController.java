@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/brands")
@@ -14,22 +16,23 @@ public class BrandController {
     private BrandService brandService;
 
     @GetMapping("")
-    public ResponseEntity<?> getBrands() {
+    public ResponseEntity<List<Brand>> getBrands() {
         return ResponseEntity.ok().body(brandService.getAllBrands());
     }
 
     @GetMapping("/{brand_id}")
-    public ResponseEntity<?> getBrandById(@PathVariable("brand_id") Integer brandId) {
+    public ResponseEntity<Brand> getBrandById(@PathVariable("brand_id") Integer brandId) {
         return ResponseEntity.ok().body(brandService.getBrandById(brandId));
     }
 
     @PostMapping("")
-    public ResponseEntity<?> addBrand(@RequestBody Brand brand) {
+    public ResponseEntity<Brand> addBrand(@RequestBody Brand brand) {
         return ResponseEntity.ok().body(brandService.addBrand(brand));
     }
 
-    @PutMapping("")
-    public ResponseEntity<?> updateBrand(@RequestBody Brand brand) {
+    @PutMapping("/{brand_id}")
+    public ResponseEntity<Brand> updateBrand(@RequestBody Brand brand, @PathVariable("brand_id") Integer brandId) {
+        brand.setId(brandId);
         return ResponseEntity.ok().body(brandService.updateBrand(brand));
     }
 
