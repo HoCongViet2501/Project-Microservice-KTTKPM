@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/products")
@@ -23,38 +25,38 @@ public class ProductController {
     private BrandService brandService;
 
     @GetMapping("")
-    public ResponseEntity<?> getProducts() {
+    public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok().body(productService.getAllProducts());
     }
 
     @GetMapping("/{product_id}")
-    public ResponseEntity<?> getProductById(@PathVariable("product_id") Integer productId) {
+    public ResponseEntity<Product> getProductById(@PathVariable("product_id") Integer productId) {
         return ResponseEntity.ok().body(productService.getProductById(productId));
     }
 
     @GetMapping("/category/{category_id}")
-    public ResponseEntity<?> getProductsByCategoryId(@PathVariable("category_id") Integer categoryId) {
+    public ResponseEntity<List<Product>> getProductsByCategoryId(@PathVariable("category_id") Integer categoryId) {
         return ResponseEntity.ok().body(productService.getProductsByCategory(categoryId));
     }
 
     @GetMapping("/brand/{brand_id}")
-    public ResponseEntity<?> getProductsByBrandId(@PathVariable("brand_id") Integer brandId) {
+    public ResponseEntity<List<Product>> getProductsByBrandId(@PathVariable("brand_id") Integer brandId) {
         return ResponseEntity.ok().body(productService.getProductsByBrand(brandId));
     }
 
     @GetMapping("/search/{keyword}")
-    public ResponseEntity<?> searchProducts(@PathVariable("keyword") String keyword) {
+    public ResponseEntity<List<Product>> searchProducts(@PathVariable("keyword") String keyword) {
         return ResponseEntity.ok().body(productService.searchProducts(keyword));
     }
 
     @GetMapping("/brand/{brand_id}/category/{category_id}")
-    public ResponseEntity<?> getProductsByBrandIdAndCategoryId(@PathVariable("brand_id") Integer brandId,
-                                                              @PathVariable("category_id") Integer categoryId) {
+    public ResponseEntity<List<Product>> getProductsByBrandIdAndCategoryId(@PathVariable("brand_id") Integer brandId,
+                                                                  @PathVariable("category_id") Integer categoryId) {
         return ResponseEntity.ok().body(productService.getProductsByCategoryAndBrand(categoryId, brandId));
     }
 
     @PostMapping("")
-    public ResponseEntity<?> addProduct(@RequestBody ProductRequest product) {
+    public ResponseEntity<Product> addProduct(@RequestBody ProductRequest product) {
         Brand brand = brandService.getBrandById(product.getBrandId());
         Category category = categoryService.getCategoryById(product.getCategoryId());
         Product newProduct = new Product();
@@ -71,7 +73,7 @@ public class ProductController {
     }
 
     @PutMapping("/{product_id}")
-    public ResponseEntity<?> updateProduct(@RequestBody ProductRequest product, @PathVariable("product_id") Integer productId) {
+    public ResponseEntity<Product> updateProduct(@RequestBody ProductRequest product, @PathVariable("product_id") Integer productId) {
         Brand brand = brandService.getBrandById(product.getBrandId());
         Category category = categoryService.getCategoryById(product.getCategoryId());
         Product newProduct = new Product();

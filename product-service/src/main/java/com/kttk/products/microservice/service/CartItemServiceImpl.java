@@ -18,20 +18,17 @@ public class CartItemServiceImpl implements CartItemService{
     }
 
     @Override
-    public boolean addCartItem(CartItem cartItem) {
-        cartItemRepository.save(cartItem);
-        return true;
+    public CartItem addCartItem(CartItem cartItem) {
+        return cartItemRepository.save(cartItem);
     }
 
     @Override
-    public boolean deleteCartItem(Integer cartItemId) {
+    public void deleteCartItem(Integer cartItemId) {
         cartItemRepository.deleteById(cartItemId);
-        return true;
     }
 
     @Override
-    public boolean updateCartItem(CartItem cartItem) {
-        cartItemRepository.save(cartItem);
-        return true;
+    public CartItem updateCartItem(CartItem cartItem) {
+        return cartItemRepository.save(cartItem);
     }
 }
