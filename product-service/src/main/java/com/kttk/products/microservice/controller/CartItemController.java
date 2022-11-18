@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/cart-items")
@@ -14,17 +16,18 @@ public class CartItemController {
     private CartItemService cartItemService;
 
     @GetMapping("/cart/{cart_id}")
-    public ResponseEntity<?> getCartItemsByCartId(@PathVariable("cart_id") Integer cartId) {
+    public ResponseEntity<List<CartItem>> getCartItemsByCartId(@PathVariable("cart_id") Integer cartId) {
         return ResponseEntity.ok().body(cartItemService.getCartItemsByCartId(cartId));
     }
 
     @PostMapping("")
-    public ResponseEntity<?> addCartItem(@RequestBody CartItem cartItem) {
+    public ResponseEntity<CartItem> addCartItem(@RequestBody CartItem cartItem) {
         return ResponseEntity.ok().body(cartItemService.addCartItem(cartItem));
     }
 
-    @PutMapping("")
-    public ResponseEntity<?> updateCartItem(@RequestBody CartItem cartItem) {
+    @PutMapping("/{cart_item_id}")
+    public ResponseEntity<CartItem> updateCartItem(@RequestBody CartItem cartItem, @PathVariable("cart_item_id") Integer cartItemId) {
+        cartItem.setId(cartItemId);
         return ResponseEntity.ok().body(cartItemService.updateCartItem(cartItem));
     }
 

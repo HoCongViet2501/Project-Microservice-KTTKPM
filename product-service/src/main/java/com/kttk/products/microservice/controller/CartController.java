@@ -1,5 +1,6 @@
 package com.kttk.products.microservice.controller;
 
+import com.kttk.products.microservice.entity.Cart;
 import com.kttk.products.microservice.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ public class CartController {
     private CartService cartService;
 
     @GetMapping("/user/{user_id}")
-    public ResponseEntity<?> getCartById(@PathVariable("user_id") Integer userId) {
+    public ResponseEntity<Cart> getCartById(@PathVariable("user_id") Integer userId) {
         return ResponseEntity.ok().body(cartService.getCartByUserId(userId));
     }
 
