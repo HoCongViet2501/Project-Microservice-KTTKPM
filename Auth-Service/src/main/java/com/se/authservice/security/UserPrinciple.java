@@ -1,6 +1,6 @@
 package com.se.authservice.security;
 
-import com.se.backend.ecommerceapp.model.entity.Account;
+import com.se.authservice.model.entity.Account;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

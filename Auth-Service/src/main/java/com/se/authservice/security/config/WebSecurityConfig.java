@@ -1,7 +1,7 @@
 package com.se.authservice.security.config;
 
-import com.se.backend.ecommerceapp.security.UserDetailsServiceImpl;
-import com.se.backend.ecommerceapp.security.jwt.JwtConfigurer;
+import com.se.authservice.security.UserDetailsServiceImpl;
+import com.se.authservice.security.jwt.JwtConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

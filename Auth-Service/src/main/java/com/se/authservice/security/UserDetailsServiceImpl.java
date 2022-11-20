@@ -1,7 +1,7 @@
 package com.se.authservice.security;
 
-import com.se.backend.ecommerceapp.model.entity.Account;
-import com.se.backend.ecommerceapp.repository.AccountRepository;
+import com.se.authservice.model.entity.Account;
+import com.se.authservice.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,10 +1,10 @@
 package com.se.authservice.controller;
 
-import com.se.backend.ecommerceapp.dto.request.AccountRequest;
-import com.se.backend.ecommerceapp.dto.request.LoginRequest;
-import com.se.backend.ecommerceapp.dto.response.AccountResponse;
-import com.se.backend.ecommerceapp.dto.response.LoginResponse;
-import com.se.backend.ecommerceapp.service.AuthService;
+import com.se.authservice.dto.request.AccountRequest;
+import com.se.authservice.dto.request.LoginRequest;
+import com.se.authservice.dto.response.AccountResponse;
+import com.se.authservice.dto.response.LoginResponse;
+import com.se.authservice.service.AuthService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,12 +32,12 @@ public class AuthController {
     }
 
     @PostMapping(value = "/login")
+    @Retry(name = "service-java")
     @Operation(summary = "login for user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "202", description = "login successfully!"),
             @ApiResponse(responseCode = "403", description = "incorrect username or password")
     })
-
     public ResponseEntity<Object> login(@RequestBody @Valid LoginRequest loginRequest) {
         String password = loginRequest.getPassword();
         LoginResponse loginResponse = this.authenticationService.login(loginRequest.getUsername(), password);
@@ -52,9 +52,9 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "Create New User successfully"),
             @ApiResponse(responseCode = "400", description = "Bad request!")
     })
-    public ResponseEntity<Object> register(@Valid @RequestBody AccountRequest accountRequest) {
+    public ResponseEntity<Boolean> register(@Valid @RequestBody AccountRequest accountRequest) {
         AccountResponse accountResponse = this.authenticationService.register(accountRequest);
-        return ResponseEntity.ok().body(accountResponse);
+        return ResponseEntity.ok().body(accountResponse != null);
     }
 
     @Operation(summary = "logout for user")

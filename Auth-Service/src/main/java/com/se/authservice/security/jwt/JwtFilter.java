@@ -1,6 +1,6 @@
 package com.se.authservice.security.jwt;
 
-import com.se.backend.ecommerceapp.exceptions.JwtAuthenticationException;
+import com.se.authservice.exceptions.JwtAuthenticationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

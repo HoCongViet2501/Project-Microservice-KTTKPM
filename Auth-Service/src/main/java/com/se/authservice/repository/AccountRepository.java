@@ -1,6 +1,6 @@
 package com.se.authservice.repository;
 
-import com.se.backend.ecommerceapp.model.entity.Account;
+import com.se.authservice.model.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

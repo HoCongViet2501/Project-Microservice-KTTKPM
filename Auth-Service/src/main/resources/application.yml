@@ -35,11 +35,6 @@ resilience4j:
             timeout-duration: 2s
             cancel-running-future: true
 spring:
-  cache:
-    type: redis
-    redis:
-      time-to-live: 30s
-      cache-null-values: true
   cloud:
     discovery:
       enabled: true
