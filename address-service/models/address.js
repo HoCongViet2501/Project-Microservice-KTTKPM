@@ -14,16 +14,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
         default: {
-            type: DataTypes.TINYINT,
+            type: DataTypes.BOOLEAN,
         },
         userId: {
             type: DataTypes.INTEGER,
+            field: 'user_id',
         }
     }, {
         sequelize,
         tableName: 'address',
         createdAt: false,
-        updatedAt: false
+        updatedAt: false,
+        underscored: true,
     });
     return Address;
 }
