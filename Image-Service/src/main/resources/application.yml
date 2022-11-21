@@ -31,9 +31,9 @@ resilience4j:
         max-attempts: 3
   timelimiter:
     instances:
-        service-java:
-            timeout-duration: 2s
-            cancel-running-future: true
+      service-java:
+        timeout-duration: 2s
+        cancel-running-future: true
 spring:
   cloud:
     discovery:

@@ -12,8 +12,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: ecommerce-service-java
-          uri: http://localhost:8081
+        - id: auth-service
+          uri: lb://auth-service
           predicates:
-            - Path=/api/**
-            - Path=/swagger-ui.html
+            - Path=/api/auth/**, /api/users/**, /auth/**
+        - id: image-service
+          uri: lb://image-service
+          predicates:
+            - Path=/api/images/**, /image/**
+    discovery:
+      enabled: true
+logging:
+  level:
+    root: info
+    org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator: info
+    org.springframework.cloud.gateway.handler: trace
