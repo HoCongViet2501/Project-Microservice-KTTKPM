@@ -20,6 +20,10 @@ spring:
           uri: lb://image-service
           predicates:
             - Path=/api/images/**, /image/**
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/api/products/**, /product/**, /api/categories/**, /api/brands/**, /api/cart-items/**, /api/carts/**
     discovery:
       enabled: true
 logging:

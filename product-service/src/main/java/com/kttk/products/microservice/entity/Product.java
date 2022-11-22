@@ -1,5 +1,6 @@
 package com.kttk.products.microservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,9 +27,11 @@ public class Product {
     @Column(name = "units_in_stock")
     private Integer unitsInStock;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 

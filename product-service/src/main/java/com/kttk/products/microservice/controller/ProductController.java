@@ -51,22 +51,20 @@ public class ProductController {
 
     @GetMapping("/brand/{brand_id}/category/{category_id}")
     public ResponseEntity<List<Product>> getProductsByBrandIdAndCategoryId(@PathVariable("brand_id") Integer brandId,
-                                                                  @PathVariable("category_id") Integer categoryId) {
+                                                                           @PathVariable("category_id") Integer categoryId) {
         return ResponseEntity.ok().body(productService.getProductsByCategoryAndBrand(categoryId, brandId));
     }
 
     @PostMapping("")
-    public ResponseEntity<Product> addProduct(@RequestBody ProductRequest product) {
-        Brand brand = brandService.getBrandById(product.getBrandId());
-        Category category = categoryService.getCategoryById(product.getCategoryId());
+    public ResponseEntity<Object> addProduct(@RequestBody ProductRequest product) {
         Product newProduct = new Product();
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
         newProduct.setImageUrl(product.getImageUrl());
         newProduct.setPrice(product.getPrice());
         newProduct.setUnitsInStock(product.getUnitsInStock());
-        newProduct.setCategory(category);
-        newProduct.setBrand(brand);
+        newProduct.setCategory(categoryService.getCategoryById(product.getCategoryId()));
+        newProduct.setBrand(brandService.getBrandById(product.getBrandId()));
         newProduct.setIsActive(product.getIsActive());
 
         return ResponseEntity.ok().body(productService.addProduct(newProduct));
