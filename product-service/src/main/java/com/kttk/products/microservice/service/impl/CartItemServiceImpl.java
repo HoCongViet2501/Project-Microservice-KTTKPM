@@ -1,14 +1,15 @@
-package com.kttk.products.microservice.service;
+package com.kttk.products.microservice.service.impl;
 
 import com.kttk.products.microservice.entity.CartItem;
 import com.kttk.products.microservice.repository.CartItemRepository;
+import com.kttk.products.microservice.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CartItemServiceImpl implements CartItemService{
+public class CartItemServiceImpl implements CartItemService {
     @Autowired
     private CartItemRepository cartItemRepository;
 

@@ -24,6 +24,14 @@ spring:
           uri: lb://product-service
           predicates:
             - Path=/api/products/**, /product/**, /api/categories/**, /api/brands/**, /api/cart-items/**, /api/carts/**
+        - id: address-service
+          uri: lb://address-service
+          predicates:
+            - Path=/api/addresses/**, /address/**
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/api/orders/**, /order/**
     discovery:
       enabled: true
 logging:

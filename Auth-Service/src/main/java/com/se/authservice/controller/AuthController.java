@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/auth")
 @CircuitBreaker(name = "service-java")
 public class AuthController {

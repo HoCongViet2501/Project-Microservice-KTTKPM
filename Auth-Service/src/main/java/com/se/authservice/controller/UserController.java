@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin
 @Retry(name = "service-java")
 @CircuitBreaker(name = "service-java")
 public class UserController {

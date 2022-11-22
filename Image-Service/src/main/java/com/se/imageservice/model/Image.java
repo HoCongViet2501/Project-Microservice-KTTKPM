@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "images")
-public class Image {
+public class Image  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

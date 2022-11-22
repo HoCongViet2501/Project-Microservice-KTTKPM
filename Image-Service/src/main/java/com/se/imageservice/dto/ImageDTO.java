@@ -4,13 +4,14 @@ import com.se.imageservice.model.Image;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ImageDTO {
+public class ImageDTO implements Serializable {
     private Long id;
     
     @NotNull(message = "required")

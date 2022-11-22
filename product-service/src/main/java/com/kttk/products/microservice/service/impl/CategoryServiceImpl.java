@@ -1,7 +1,8 @@
-package com.kttk.products.microservice.service;
+package com.kttk.products.microservice.service.impl;
 
 import com.kttk.products.microservice.entity.Category;
 import com.kttk.products.microservice.repository.CategoryRepository;
+import com.kttk.products.microservice.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

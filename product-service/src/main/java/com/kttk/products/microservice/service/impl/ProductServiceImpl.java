@@ -1,14 +1,15 @@
-package com.kttk.products.microservice.service;
+package com.kttk.products.microservice.service.impl;
 
 import com.kttk.products.microservice.entity.Product;
 import com.kttk.products.microservice.repository.ProductRepository;
+import com.kttk.products.microservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
     @Override
