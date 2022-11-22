@@ -1,6 +1,7 @@
 package com.se.imageservice.controller;
 
 import com.se.imageservice.service.ImageService;
+
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/images")
 @Slf4j
 @CircuitBreaker(name = "service-java")
+@Retry(name = "service-java", fallbackMethod = "fallback")
 public class ImageController {
     
     @Autowired
