@@ -27,11 +27,11 @@ public class Product {
     @Column(name = "units_in_stock")
     private Integer unitsInStock;
     @ManyToOne
-    @JsonIgnore
+//    @JsonIgnore
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     @ManyToOne
-    @JsonIgnore
+//    @JsonIgnore
     @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 

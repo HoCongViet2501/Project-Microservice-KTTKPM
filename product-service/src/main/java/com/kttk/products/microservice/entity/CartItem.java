@@ -1,5 +1,6 @@
 package com.kttk.products.microservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class CartItem {
     private Integer quantity;
     private Double price;
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
     @ManyToOne

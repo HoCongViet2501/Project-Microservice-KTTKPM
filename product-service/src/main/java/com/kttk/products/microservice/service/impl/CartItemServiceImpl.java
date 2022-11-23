@@ -32,4 +32,9 @@ public class CartItemServiceImpl implements CartItemService {
     public CartItem updateCartItem(CartItem cartItem) {
         return cartItemRepository.save(cartItem);
     }
+
+    @Override
+    public CartItem getCartItemById(Integer cartItemId) {
+        return cartItemRepository.findById(cartItemId).get();
+    }
 }

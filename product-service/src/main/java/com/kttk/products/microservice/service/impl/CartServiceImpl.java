@@ -1,6 +1,7 @@
 package com.kttk.products.microservice.service.impl;
 
 import com.kttk.products.microservice.entity.Cart;
+import com.kttk.products.microservice.entity.CartItem;
 import com.kttk.products.microservice.repository.CartRepository;
 import com.kttk.products.microservice.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,24 @@ public class CartServiceImpl implements CartService {
         newCart.setUserId(cart.getUserId());
         cartRepository.save(newCart);
         return true;
+    }
+
+    @Override
+    public Cart getCartById(Integer cartId) {
+        return cartRepository.findById(cartId).get();
+    }
+
+    @Override
+    public void updateCart(Integer cartId) {
+        Cart cart = cartRepository.findById(cartId).get();
+        Double totalPrice = 0.0;
+        Integer totalItems = 0;
+        for (CartItem cartItem : cart.getCartItems()) {
+            totalPrice += cartItem.getQuantity() * cartItem.getProduct().getPrice();
+            totalItems += cartItem.getQuantity();
+        }
+        cart.setTotalPrice(totalPrice);
+        cart.setTotalItems(totalItems);
+        cartRepository.save(cart);
     }
 }

@@ -9,4 +9,6 @@ public interface CartItemService {
     public CartItem addCartItem(CartItem cartItem);
     public void deleteCartItem(Integer cartItemId);
     public CartItem updateCartItem(CartItem cartItem);
+
+    public CartItem getCartItemById(Integer cartItemId);
 }

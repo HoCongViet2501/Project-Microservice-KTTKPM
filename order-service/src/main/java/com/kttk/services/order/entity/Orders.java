@@ -18,10 +18,12 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+    private String fullname;
+    private String email;
+    private String phone;
+    private String address;
     @Column(name = "user_id", nullable = false)
     private Integer userId;
-    @Column(name = "address_id", nullable = false)
-    private Integer addressId;
     @Column(name = "cart_id", nullable = false)
     private Integer cartId;
     @Column(name = "status", nullable = false)
