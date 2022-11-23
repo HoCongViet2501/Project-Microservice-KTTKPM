@@ -22,9 +22,9 @@ public class ImageController {
     private ImageService imageService;
     
     @PostMapping(value = "/upload", consumes = "multipart/form-data")
-    public ResponseEntity<Object> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam Long productId) throws InternalErrorException {
+    public ResponseEntity<Object> uploadImage(@RequestParam("file") MultipartFile file) throws InternalErrorException {
         log.info("upload image:  File Name : {}", file.getOriginalFilename());
-        return ResponseEntity.ok().body(imageService.upload(file, productId));
+        return ResponseEntity.ok().body(imageService.upload(file));
     }
     
     public ResponseEntity<Object> uploadImageFallback() {

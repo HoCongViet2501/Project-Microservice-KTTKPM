@@ -22,5 +22,4 @@ public class Image  implements Serializable {
     @Column(name = "file_url")
     private String fileURL;
 
-    private Long productId;
 }

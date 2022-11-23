@@ -15,8 +15,7 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/api/orders")
 @CircuitBreaker(name= "service-java")
-@Retry(name = "service-java")
-//@TimeLimiter(name = "service-java")
+@Retry(name = "service-java", fallbackMethod = "fallback")
 public class OrderController {
     @Autowired
     private OrderService orderService;
@@ -39,5 +38,9 @@ public class OrderController {
     @PutMapping("/{id}")
     public ResponseEntity<Orders> updateOrder(@RequestBody Orders order) {
         return ResponseEntity.ok(orderService.updateOrder(order));
+    }
+
+    public ResponseEntity<Object> fallback(Exception e) {
+        return ResponseEntity.ok("Order service is down. Please try again later.");
     }
 }

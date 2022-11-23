@@ -39,10 +39,10 @@ public class AuthController {
             @ApiResponse(responseCode = "202", description = "login successfully!"),
             @ApiResponse(responseCode = "403", description = "incorrect username or password")
     })
-    public ResponseEntity<Object> login(@RequestBody @Valid LoginRequest loginRequest) {
+    public ResponseEntity<String> login(@RequestBody @Valid LoginRequest loginRequest) {
         String password = loginRequest.getPassword();
         LoginResponse loginResponse = this.authenticationService.login(loginRequest.getUsername(), password);
-        return ResponseEntity.accepted().body(loginResponse);
+        return ResponseEntity.accepted().body(loginResponse.getToken());
     }
 
     @Operation(summary = "register for new user")
