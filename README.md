@@ -1,8 +1,8 @@
 # Project-Course-KTTKPM
 - Project using:
  + Microservice
- + API Gateway 
- + Circuit Breaker, TimeLimter
+ + API Gateway, Gateway authentication + JWT
+ + Circuit Breaker, TimeLimter, RateLimiter
  + Redis cache
  + Eureka Server & Discovery Client
- + Two service using SpringBoot and ExpressJS
+ + Rest Template
