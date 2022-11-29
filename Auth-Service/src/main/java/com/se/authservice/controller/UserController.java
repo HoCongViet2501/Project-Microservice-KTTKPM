@@ -3,6 +3,7 @@ package com.se.authservice.controller;
 import com.se.authservice.dto.request.UserRequest;
 import com.se.authservice.service.UserService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @Retry(name = "service-java")
 @CircuitBreaker(name = "service-java")
+@RateLimiter(name = "service-java")
 public class UserController {
     @Autowired
     private UserService userService;

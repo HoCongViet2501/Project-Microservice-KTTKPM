@@ -3,6 +3,7 @@ package com.se.authservice.service.impl;
 import com.se.authservice.dto.request.AccountRequest;
 import com.se.authservice.dto.response.AccountResponse;
 import com.se.authservice.dto.response.LoginResponse;
+import com.se.authservice.dto.response.UserResponse;
 import com.se.authservice.exceptions.ForbiddenException;
 import com.se.authservice.mapping.MapData;
 import com.se.authservice.model.entity.Account;
@@ -71,7 +72,9 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setAccount(accountSaved);
         this.userRepository.save(user);
-        return MapData.mapOne(accountSaved, AccountResponse.class);
+        AccountResponse accountResponse = MapData.mapOne(accountSaved, AccountResponse.class);
+        accountResponse.setUser(MapData.mapOne(user, UserResponse.class));
+        return accountResponse;
     }
 
     @Override

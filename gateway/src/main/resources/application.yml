@@ -23,7 +23,7 @@ spring:
         - id: product-service
           uri: lb://product-service
           predicates:
-            - Path=/api/products/**, /product/**, /api/categories/**, /api/brands/**, /api/cart-items/**, /api/carts/**
+            - Path=/api/products/**, /product/**, /api/categories/**, /api/brands/**, /api/cart-items/**, /api/cart/**
         - id: address-service
           uri: lb://address-service
           predicates:

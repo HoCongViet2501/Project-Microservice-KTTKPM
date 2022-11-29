@@ -18,6 +18,6 @@ public class RestAddressService {
 
     public AddressResponse getAddressById(Integer id) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject("http://localhost:8080/api/addresses/" + id, AddressResponse.class);
+        return restTemplate.getForObject("http://localhost:8084/api/addresses/" + id, AddressResponse.class);
     }
 }

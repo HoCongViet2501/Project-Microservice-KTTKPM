@@ -6,6 +6,7 @@ import com.se.authservice.dto.response.AccountResponse;
 import com.se.authservice.dto.response.LoginResponse;
 import com.se.authservice.service.AuthService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 @CrossOrigin
 @RequestMapping("/api/auth")
 @CircuitBreaker(name = "service-java")
+@RateLimiter(name = "service-java")
 public class AuthController {
     private final AuthService authenticationService;
 
@@ -53,9 +55,9 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "Create New User successfully"),
             @ApiResponse(responseCode = "400", description = "Bad request!")
     })
-    public ResponseEntity<Boolean> register(@Valid @RequestBody AccountRequest accountRequest) {
+    public ResponseEntity<Object> register(@Valid @RequestBody AccountRequest accountRequest) {
         AccountResponse accountResponse = this.authenticationService.register(accountRequest);
-        return ResponseEntity.ok().body(accountResponse != null);
+        return ResponseEntity.ok().body(accountResponse);
     }
 
     @Operation(summary = "logout for user")

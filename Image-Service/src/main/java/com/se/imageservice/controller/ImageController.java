@@ -3,6 +3,7 @@ package com.se.imageservice.controller;
 import com.se.imageservice.service.ImageService;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.maven.InternalErrorException;
@@ -16,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @CrossOrigin
 @CircuitBreaker(name = "service-java")
+@Retry(name = "service-java")
+@RateLimiter(name = "service-java")
 public class ImageController {
     
     @Autowired

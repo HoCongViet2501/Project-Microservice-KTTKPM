@@ -38,13 +38,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(value = "users")
     public List<UserResponse> findAllUser() {
         // TODO Auto-generated method stub
         return MapData.mapList(this.userRepository.findAll(), UserResponse.class);
     }
 
     @Override
-    @CachePut(value = "user", key = "#user.id")
+    @Cacheable(value = "user")
     public UserResponse createUser(UserRequest user) {
         // TODO Auto-generated method stub
             User newUser = MapData.mapOne(user, User.class);

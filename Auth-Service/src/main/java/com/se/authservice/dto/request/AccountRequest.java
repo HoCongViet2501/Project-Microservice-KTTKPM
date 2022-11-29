@@ -23,4 +23,5 @@ public class AccountRequest {
     
     @NotNull(message = "required")
     private String role;
+
 }

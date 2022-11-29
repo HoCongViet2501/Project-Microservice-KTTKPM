@@ -38,6 +38,7 @@ public class ImageServiceImpl implements ImageService {
     private ImageRepository imageRepository;
     
     @Override
+    @Cacheable(value = "image")
     public ImageDTO upload(MultipartFile multipartFile) throws InternalErrorException {
         try {
             String fileName = multipartFile.getOriginalFilename();

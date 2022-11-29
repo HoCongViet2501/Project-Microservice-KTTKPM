@@ -20,7 +20,7 @@ resilience4j:
         failure-rate-threshold: 50
         minimum-number-of-calls: 5
         automatic-transition-from-open-to-half-open-enabled: true
-        wait-duration-in-open-state: 5s
+        wait-duration-in-open-state: 8s
         permitted-number-of-calls-in-half-open-state: 4
         sliding-window-type: COUNT_BASED
         sliding-window-size: 10
@@ -29,11 +29,13 @@ resilience4j:
       service-java:
         wait-duration: 2s
         max-attempts: 3
-  timelimiter:
+  ratelimiter:
     instances:
       service-java:
-        timeout-duration: 2s
-        cancel-running-future: true
+        register-health-indicator: false
+        limit-for-period: 3
+        limit-refresh-period: 10s
+        timeout-duration: 5s
 spring:
   cloud:
     discovery:

@@ -18,6 +18,6 @@ public class RestUserService {
 
     public UserResponse getUserById(Integer id) {
         RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.getForObject("http://localhost:8080/api/users/" + id, UserResponse.class);
+        return restTemplate.getForObject("http://localhost:8081/api/users/" + id, UserResponse.class);
     }
 }

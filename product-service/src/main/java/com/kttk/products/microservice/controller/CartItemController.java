@@ -62,6 +62,7 @@ public class CartItemController {
         if (res == null) {
             return ResponseEntity.badRequest().body(null);
         }
+        System.err.println(cart.getId());
         cartService.updateCart(cart.getId());
         return ResponseEntity.ok().body(res);
     }

@@ -24,7 +24,7 @@ public class ProductController {
     @Autowired
     private BrandService brandService;
 
-    @GetMapping("")
+    @GetMapping("/all")
     public ResponseEntity<List<Product>> getProducts() {
         return ResponseEntity.ok().body(productService.getAllProducts());
     }
@@ -55,7 +55,7 @@ public class ProductController {
         return ResponseEntity.ok().body(productService.getProductsByCategoryAndBrand(categoryId, brandId));
     }
 
-    @PostMapping("")
+    @PostMapping("new")
     public ResponseEntity<Object> addProduct(@RequestBody ProductRequest product) {
         Product newProduct = new Product();
         newProduct.setName(product.getName());

@@ -26,7 +26,7 @@ public class RestOrderService {
     public OrderResponse createOrder(OrdersRequest order) {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<OrdersRequest> request = new HttpEntity<>(order, setHeaders());
-        ResponseEntity<OrderResponse> response = restTemplate.postForEntity("http://localhost:8080/api/orders", request, OrderResponse.class);
+        ResponseEntity<OrderResponse> response = restTemplate.postForEntity("http://localhost:8085/api/orders", request, OrderResponse.class);
         return response.getBody();
     }
 
@@ -40,7 +40,7 @@ public class RestOrderService {
 
         HttpEntity<Object> requestBody = new HttpEntity<>(setHeaders());
 
-        ResponseEntity<OrderResponse> res = restTemplate.exchange("http://localhost:8080/api/orders/" + id, HttpMethod.GET, requestBody, OrderResponse.class);
+        ResponseEntity<OrderResponse> res = restTemplate.exchange("http://localhost:8085/api/orders/" + id, HttpMethod.GET, requestBody, OrderResponse.class);
 
         return res.getBody();
     }

@@ -5,6 +5,8 @@ import com.kttk.products.microservice.entity.CartItem;
 import com.kttk.products.microservice.repository.CartRepository;
 import com.kttk.products.microservice.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +14,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartRepository cartRepository;
     @Override
+//    @Cacheable(value = "Cart")
     public Cart getCartByUserId(Integer userId) {
         // get cart by user id and is active && is purchased
         Cart cart = cartRepository.findByUserIdAndIsActiveAndIsPurchased(userId, true, false);
@@ -30,11 +33,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+//    @CachePut(value = "Cart", key = "#cartId")
     public boolean purchaseCart(Integer cartId) {
-        Cart cart = cartRepository.findById(cartId).get();
-        if (cart == null) {
-            return false;
-        }
+        Cart cart = cartRepository.findById(cartId).orElseThrow(()
+        -> new RuntimeException("Cart not found"));
         cart.setIsPurchased(true);
         cart.setIsActive(false);
         cartRepository.save(cart);
@@ -49,11 +51,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    @Cacheable(value = "Cart", key = "#cartId")
     public Cart getCartById(Integer cartId) {
         return cartRepository.findById(cartId).get();
     }
 
     @Override
+    @CachePut(value = "Cart", key = "#cartId")
     public void updateCart(Integer cartId) {
         Cart cart = cartRepository.findById(cartId).get();
         Double totalPrice = 0.0;

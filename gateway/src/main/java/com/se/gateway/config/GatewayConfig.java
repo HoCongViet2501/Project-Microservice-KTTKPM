@@ -27,7 +27,7 @@ public class GatewayConfig {
                 .route("address-service",r -> r.path("/api/addresses/**")
                         .filters(f -> f.filter(jwtAuthenticationFilter))
                         .uri("lb://address-service"))
-                .route("product-service",r -> r.path("/api/products/**","/api/categories/**","/api/brands/**","/api/cart-items/**", "/api/carts/**")
+                .route("product-service",r -> r.path("/api/products/**","/api/categories/**","/api/brands/**", "/api/cart/**")
                         .filters(f -> f.filter(jwtAuthenticationFilter))
                         .uri("lb://product-service"))
                 .route("order-service",r -> r.path("/api/orders/**")

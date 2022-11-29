@@ -6,6 +6,7 @@ import com.kttk.services.order.entity.Orders;
 import com.kttk.services.order.service.OrderService;
 import com.kttk.services.order.util.RestCartService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,9 @@ import java.util.List;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/orders")
-//@CircuitBreaker(name= "service-java")
-@Retry(name = "service-java")
-//@TimeLimiter(name = "service-java")
+@CircuitBreaker(name="service-java")
+@Retry(name="service-java")
+@RateLimiter(name="service-java")
 public class OrderController {
     @Autowired
     private OrderService orderService;

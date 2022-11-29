@@ -3,6 +3,7 @@ package com.kttk.products.microservice.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "brand")
-public class Brand {
+public class Brand implements Serializable {
+    private static final long serialVersionUID = 4762247448727454889L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
